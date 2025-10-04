@@ -68,10 +68,10 @@ export function ChatInterface() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 relative">
       <motion.div
         id="voice-visualizer"
-        className="fixed inset-0 flex items-center justify-center z-0 pointer-events-none"
+        className="fixed inset-0 flex items-center justify-center z-0 pointer-events-none overflow-hidden"
         animate={{
           opacity: voiceActive ? 1 : 0.3,
-          scale: voiceActive ? 1 + voiceIntensity * 0.3 : 1,
+          scale: voiceActive ? 1 + voiceIntensity * 0.2 : 1,
         }}
         transition={{
           duration: 0.5,
@@ -92,8 +92,8 @@ export function ChatInterface() {
             ease: "easeInOut",
           }}
           style={{
-            width: 400 + voiceIntensity * 200,
-            height: 400 + voiceIntensity * 200,
+            width: 800 + voiceIntensity * 400,
+            height: 800 + voiceIntensity * 400,
           }}
         />
 
@@ -110,13 +110,18 @@ export function ChatInterface() {
             delay: 0.1,
           }}
           style={{
-            width: 300 + voiceIntensity * 150,
-            height: 300 + voiceIntensity * 150,
+            width: 600 + voiceIntensity * 300,
+            height: 600 + voiceIntensity * 300,
           }}
         />
 
         <LiquidMetal
-          style={{ height: 600, width: 600, filter: "blur(60px)", position: "absolute" }}
+          style={{
+            height: "100vh",
+            width: "100vw",
+            filter: "blur(80px)",
+            position: "absolute",
+          }}
           colorBack="hsl(0, 0%, 0%, 0)"
           colorTint={voiceActive ? "hsl(180, 100%, 60%)" : "hsl(190, 85%, 55%)"}
           repetition={4}
@@ -128,12 +133,16 @@ export function ChatInterface() {
           shape="circle"
           offsetX={0}
           offsetY={0}
-          scale={0.7 + voiceIntensity * 0.4}
+          scale={0.9 + voiceIntensity * 0.4}
           rotation={50 + (voiceActive ? voiceIntensity * 100 : 0)}
           speed={5 + voiceIntensity * 10}
         />
         <LiquidMetal
-          style={{ height: 600, width: 600 }}
+          style={{
+            height: "100vh",
+            width: "100vw",
+            position: "absolute",
+          }}
           colorBack="hsl(0, 0%, 0%)"
           colorTint={voiceActive ? "hsl(180, 100%, 60%)" : "hsl(190, 85%, 55%)"}
           repetition={4}
@@ -145,7 +154,7 @@ export function ChatInterface() {
           shape="circle"
           offsetX={0}
           offsetY={0}
-          scale={0.7 + voiceIntensity * 0.4}
+          scale={0.9 + voiceIntensity * 0.4}
           rotation={50 + (voiceActive ? voiceIntensity * 100 : 0)}
           speed={5 + voiceIntensity * 10}
         />
