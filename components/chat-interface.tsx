@@ -42,12 +42,40 @@ export function ChatInterface() {
                 timestamp: new Date(msg.timestamp),
               }))
 
-              const existingSignatures = new Set(prev.map((m) => `${m.role}:${m.content}`))
-              const uniqueNewMessages = newMessages.filter(
-                (m: Message) => !existingSignatures.has(`${m.role}:${m.content}`),
-              )
+              if (prev.length === 0) {
+                return newMessages
+              }
 
-              return [...prev, ...uniqueNewMessages]
+              const result = [...prev]
+
+              for (const newMsg of newMessages) {
+                const lastMsg = result[result.length - 1]
+                const timeDiff = Math.abs(newMsg.timestamp.getTime() - lastMsg.timestamp.getTime())
+                const isSameRole = lastMsg.role === newMsg.role
+                const isRecent = timeDiff < 5000
+                const isExtension =
+                  newMsg.content.startsWith(lastMsg.content) ||
+                  lastMsg.content.startsWith(newMsg.content) ||
+                  newMsg.content.includes(lastMsg.content)
+
+                if (isSameRole && isRecent && isExtension) {
+                  result[result.length - 1] = {
+                    ...lastMsg,
+                    content: newMsg.content,
+                    timestamp: newMsg.timestamp,
+                  }
+                  console.log("[v0] Updated message in place:", newMsg.content.substring(0, 50))
+                } else {
+                  const exists = result.some((m) => m.role === newMsg.role && m.content === newMsg.content)
+
+                  if (!exists) {
+                    result.push(newMsg)
+                    console.log("[v0] Added new message:", newMsg.content.substring(0, 50))
+                  }
+                }
+              }
+
+              return result
             })
           }
         }
@@ -189,7 +217,7 @@ export function ChatInterface() {
                         <span
                           className={`text-xs font-medium ${msg.role === "user" ? "text-zinc-400" : "text-cyan-400"}`}
                         >
-                          {msg.role === "user" ? "You:" : "Bot:"}
+                          {msg.role === "user" ? "You:" : "Jenny:"}
                         </span>
                         <p className="flex-1 leading-relaxed">{msg.content}</p>
                       </div>
