@@ -80,41 +80,6 @@ export function ChatInterface() {
           damping: 20,
         }}
       >
-        <motion.div
-          className="absolute rounded-full bg-cyan-400/20"
-          animate={{
-            scale: voiceActive ? [1, 1.6, 1] : 1,
-            opacity: voiceActive ? [0.3, 0.6, 0.3] : 0.2,
-          }}
-          transition={{
-            duration: 1,
-            repeat: voiceActive ? Number.POSITIVE_INFINITY : 0,
-            ease: "easeInOut",
-          }}
-          style={{
-            width: 400 + voiceIntensity * 200,
-            height: 400 + voiceIntensity * 200,
-          }}
-        />
-
-        <motion.div
-          className="absolute rounded-full bg-cyan-500/30"
-          animate={{
-            scale: voiceActive ? [1, 1.4, 1] : 1,
-            opacity: voiceActive ? [0.4, 0.7, 0.4] : 0.3,
-          }}
-          transition={{
-            duration: 0.8,
-            repeat: voiceActive ? Number.POSITIVE_INFINITY : 0,
-            ease: "easeInOut",
-            delay: 0.1,
-          }}
-          style={{
-            width: 300 + voiceIntensity * 150,
-            height: 300 + voiceIntensity * 150,
-          }}
-        />
-
         <LiquidMetal
           style={{ height: 600, width: 600, filter: "blur(60px)", position: "absolute" }}
           colorBack="hsl(0, 0%, 0%, 0)"
@@ -224,7 +189,7 @@ export function ChatInterface() {
                         <span
                           className={`text-xs font-medium ${msg.role === "user" ? "text-zinc-400" : "text-cyan-400"}`}
                         >
-                          {msg.role === "user" ? "You:" : "Jenny:"}
+                          {msg.role === "user" ? "You:" : "Bot:"}
                         </span>
                         <p className="flex-1 leading-relaxed">{msg.content}</p>
                       </div>
