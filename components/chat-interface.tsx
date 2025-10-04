@@ -133,8 +133,8 @@ export function ChatInterface() {
           speed={5 + voiceIntensity * 10}
         />
         <LiquidMetal
-          style={{ height: 600, width: 600 }}
-          colorBack="hsl(0, 0%, 0%)"
+          style={{ height: 600, width: 600, filter: "blur(60px)", position: "absolute" }}
+          colorBack="hsl(0, 0%, 0%, 0)"
           colorTint={voiceActive ? "hsl(180, 100%, 60%)" : "hsl(190, 85%, 55%)"}
           repetition={4}
           softness={0.5}
@@ -224,7 +224,7 @@ export function ChatInterface() {
                         <span
                           className={`text-xs font-medium ${msg.role === "user" ? "text-zinc-400" : "text-cyan-400"}`}
                         >
-                          {msg.role === "user" ? "You:" : "Bot:"}
+                          {msg.role === "user" ? "You:" : "Jenny:"}
                         </span>
                         <p className="flex-1 leading-relaxed">{msg.content}</p>
                       </div>
